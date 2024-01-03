@@ -1,6 +1,6 @@
-# expenses
+# ExpensesAPp
 
-A new Flutter project.
+A Learning Flutter project.
 
 ## Getting Started
 
