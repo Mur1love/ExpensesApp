@@ -1,3 +1,4 @@
+
 import 'package:expenses/components/chart.dart';
 import 'package:expenses/components/transaction_form.dart';
 import 'package:flutter/material.dart';
@@ -42,7 +43,6 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-
   final List<Transaction> _transactions = [];
 
   List<Transaction> get _recentTransactions {
@@ -69,9 +69,8 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   _removeTransaction(String id) {
-    
     setState(() {
-      _transactions.removeWhere((tr){
+      _transactions.removeWhere((tr) {
         return tr.id == id;
       });
     });
@@ -88,22 +87,42 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
+    final appBar = AppBar(
+      title: const Text('Despesas Pessoais'),
+      actions: <Widget>[
+        IconButton(
+          icon: const Icon(Icons.add),
+          onPressed: () => _opentransactionFormModal(context),
+        )
+      ],
+    );
+    final availableHeight = MediaQuery.of(context).size.height -
+        appBar.preferredSize.height -
+        MediaQuery.of(context).padding.top;
+
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Despesas Pessoais'),
-        actions: <Widget>[
-          IconButton(
-            icon: Icon(Icons.add),
-            onPressed: () => _opentransactionFormModal(context),
-          )
-        ],
-      ),
+      appBar: appBar,
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
-            Chart(_recentTransactions),
-            TransactionList(_transactions, _removeTransaction),
+            Switch(
+              value: true,
+              onChanged: (value) {
+
+              },
+            ),
+            Container(
+                height: availableHeight * 0.25,
+                child: Chart(
+                  _recentTransactions,
+                )),
+            Container(
+                height: availableHeight * 0.75,
+                child: TransactionList(
+                  _transactions,
+                  _removeTransaction,
+                )),
           ],
         ),
       ),
