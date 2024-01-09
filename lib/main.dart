@@ -1,4 +1,5 @@
-import 'dart:convert';
+// ignore_for_file: sized_box_for_whitespace
+
 import 'dart:io';
 
 import 'package:expenses/components/chart.dart';
@@ -190,7 +191,7 @@ class _MyHomePageState extends State<MyHomePage> {
             appBar: appBar,
             body: bodyPage,
             floatingActionButton: FloatingActionButton(
-              child: Icon(Icons.add),
+              child: const Icon(Icons.add),
               onPressed: () => _opentransactionFormModal(context),
             ),
           );
